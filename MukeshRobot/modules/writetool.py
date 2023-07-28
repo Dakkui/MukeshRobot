@@ -1,24 +1,59 @@
+import requests
 from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-from MukeshRobot import pbot
+from MukeshRobot import BOT_NAME, BOT_USERNAME
+from MukeshRobot import pbot as mukesh
 
 
-@pbot.on_message(filters.command("write"))
-async def handwriting(_, message):
-    if len(message.command) < 2:
-        return await message.reply_text("» ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴡʀɪᴛᴇ ɪᴛ ᴏɴ ᴍʏ ᴄᴏᴩʏ...")
-    m = await message.reply_text("» ᴡᴀɪᴛ ᴀ sᴇᴄ, ʟᴇᴛ ᴍᴇ ᴡʀɪᴛᴇ ᴛʜᴀᴛ ᴛᴇxᴛ...")
-    name = (
-        message.text.split(None, 1)[1]
-        if len(message.command) < 3
-        else message.text.split(None, 1)[1].replace(" ", "%20")
-    )
-    hand = "https://apis.xditya.me/write?text=" + name
-    await m.edit("» ᴜᴩʟᴏᴀᴅɪɴɢ...")
-    await pbot.send_chat_action(message.chat.id, "upload_photo")
-    await message.reply_photo(
-        hand, caption="ᴡʀɪᴛᴛᴇɴ ᴡɪᴛʜ 🖊 ʙʏ [Aujla](t.me/PunjabiChat_Group)"
-    )
+@mukesh.on_message(filters.command("write"))
+async def handwrite(_, message: Message):
+    if not message.reply_to_message:
+        text = message.text.split(None, 1)[1]
+        m = await mukesh.send_message(
+            message.chat.id, "`Please wait...,\n\nWriting your text...`"
+        )
+        API = f"https://api.sdbots.tk/write?text={text}"
+        req = requests.get(API).url
+        caption = f"""
+sᴜᴄᴇssғᴜʟʟʏ ᴡʀɪᴛᴛᴇɴ ᴛᴇxᴛ 💘
+
+✨ **ᴡʀɪᴛᴛᴇɴ ʙʏ :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
+🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {message.from_user.mention}
+❄ **ʟɪɴᴋ :** `{req}`
+"""
+        await m.delete()
+        await mukesh.send_photo(
+            message.chat.id,
+            photo=req,
+            caption=caption,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("• ᴛᴇʟᴇɢʀᴀᴩʜ •", url=f"{req}")]]
+            ),
+        )
+    else:
+        lol = message.reply_to_message.text
+        m = await mukesh.send_message(
+            message.chat.id, "`Please wait...,\n\nWriting your text...`"
+        )
+        API = f"https://api.sdbots.tk/write?text={lol}"
+        req = requests.get(API).url
+        caption = f"""
+sᴜᴄᴇssғᴜʟʟʏ ᴡʀɪᴛᴛᴇɴ ᴛᴇxᴛ 💘
+
+✨ **ᴡʀɪᴛᴛᴇɴ ʙʏ :** [{BOT_NAME}](https://t.me/{BOT_USERNAME})
+🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {message.from_user.mention}
+❄ **ʟɪɴᴋ :** `{req}`
+"""
+        await m.delete()
+        await mukesh.send_photo(
+            message.chat.id,
+            photo=req,
+            caption=caption,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("• ᴛᴇʟᴇɢʀᴀᴩʜ •", url=f"{req}")]]
+            ),
+        )
 
 
 __mod_name__ = "WʀɪᴛᴇTᴏᴏʟ"
