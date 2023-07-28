@@ -19,7 +19,7 @@ PHOTO = [
 
 Mukesh = [
     [
-        InlineKeyboardButton(text="ɴᴏᴏʙ", user_id=OWNER_ID),
+        InlineKeyboardButton(text="Tejinder Aujla", user_id=OWNER_ID),
         InlineKeyboardButton(text="ꜱᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [
@@ -46,7 +46,7 @@ async def restart(client, m: Message):
     await accha.delete()
     await asyncio.sleep(0.3)
     umm = await m.reply_sticker(
-        "CAACAgUAAxkDAAJHbmLuy2NEfrfh6lZSohacEGrVjd5wAAIOBAACl42QVKnra4sdzC_uKQQ"
+        "CAACAgIAAxkBAAJT02TECMvLYAm6F6SI0BJjrhg1J9UhAAJSaQACns4LAAFUPsHjyuovNy8E"
     )
     await umm.delete()
     await asyncio.sleep(0.2)
