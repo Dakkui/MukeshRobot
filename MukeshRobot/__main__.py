@@ -209,7 +209,7 @@ def start(update: Update, context: CallbackContext):
             first_name = update.effective_user.first_name
             
             x=update.effective_message.reply_sticker(
-                "CAACAgIAAxkBAAJTz2TEAAFhmq1XWDaD7jSqZRJsKkFhzgACTmkAAp7OCwABoX5wpf5FK9YvBA)
+                "CAACAgIAAxkBAAJTz2TEAAFhmq1XWDaD7jSqZRJsKkFhzgACTmkAAp7OCwABoX5wpf5FK9YvBA")
             x.delete()
             usr = update.effective_user
             lol = update.effective_message.reply_text(
